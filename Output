@@ -1,0 +1,13 @@
+'''
+Created on Apr 18, 2015
+
+@author: Christopher
+'''
+import MovieReader
+import Recommender
+item, ratings = MovieReader.get_data("movieratings.txt")
+name = "student1010"
+slist = Recommender.similarities(name, ratings)
+print Recommender.averages(item, ratings)
+print Recommender.similarities(name, ratings)
+print Recommender.recommended(slist, item, ratings, 5)
