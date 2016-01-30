@@ -1,0 +1,13 @@
+'''
+Created on Apr 16, 2015
+
+@author: Christopher
+'''
+def get_data(books_file, ratings_file):
+    itlist = []
+    rdict = {}
+    
+print get_data("books.txt", "bookratings.txt")
+
+#This function returns the ratings that each rater provided to the restaurant. A 0 was 
+#given for a restaurrant that a person did not go to.
