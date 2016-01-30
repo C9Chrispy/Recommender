@@ -1,0 +1,35 @@
+'''
+Module created by Christopher Lu
+'''
+
+def get_data(food_file):
+    itlist = []
+    rdict = {}
+    f = open(food_file)
+    for line in f:
+        line = line.strip().split(",")
+        line.sort()
+        if len(line) == 1:
+            name = ''.join(line)
+        else:
+            for index in range(len(line)):
+                line[index].split(" ")
+                items = line[index]
+                items = items.split(" ")
+                item = items[0]
+                itlist.append(item)
+                itlist = sorted(list(set(itlist)))
+                rdict[name] = [0]*len(itlist)
+            for index in range(len(line)):
+                line[index].split(" ")
+                items = line[index]
+                items = items.split(" ")
+                splitter = items[1]
+                i1 = itlist.index(items[0])
+                rating = int(splitter)
+                rdict[name][i1] = rating
+    f.close()
+    return itlist, rdict
+
+#This function returns the ratings that each rater provided to the restaurant. A 0 was 
+#given for a restaurrant that a person did not go to.
