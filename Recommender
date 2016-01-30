@@ -1,0 +1,60 @@
+'''
+Created on Apr 18, 2015
+
+@author: Christopher
+'''
+def averages(items, ratings):
+    from operator import itemgetter
+    answer  = []
+    for item in items:
+        numstudents = 0
+        total = 0
+        ind = items.index(item)
+        for list in ratings.values():
+            if list[ind] != 0:
+                total += int(list[ind])
+                numstudents += 1
+        avg = float(total/(numstudents + 1))
+        answer.append((item, avg))
+    answer.sort(key = itemgetter(1), reverse = True)
+    return answer
+
+#Returns the average ratings of the movies based on all the raters.
+
+def similarities(name, ratings):
+    from operator import itemgetter
+    answer = []
+    similarities = []
+    key = ratings.keys()
+    ind = key.index(name)
+    val = ratings.values()
+    refval = val[ind]
+    for (key, value) in ratings.items():
+        if key != name:
+            sim = sum(int(refval[i])*int(value[i]) for i in range(len(refval)))
+        answer.append((key, sim))
+    answer.sort(key = itemgetter(1), reverse = True)
+    return answer
+
+#Returns the similarity ratings of people compared to a specific person defined in the parameter name. E.g. if "name" is Susan and bob has the highest rating of 800, Bob's ratings are most similar to Susan's.
+
+def recommended(slist, items, ratings, n):
+    bestitems = []
+    for (person, sim) in slist:
+        key = ratings.keys()
+        i = key.index(person)
+        rate = ratings.values()[i]
+        startlist = [0]*len(rate)
+        partweight = [sim * x for x in rate]
+        for thing in range(len(startlist)):
+            for things in range(startlist[0]):
+                startlist[thing][things] = startlist[thing][things] + partweight[thing][things]
+    for a in range(n):
+        num = max(startlist)
+        ind = startlist.index(num)
+        bestitems.append(items[ind])
+        startlist.remove(num)
+    return bestitems
+        
+        
+    
