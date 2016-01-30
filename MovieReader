@@ -1,0 +1,32 @@
+'''
+Module created by Christopher Lu
+'''
+def get_data(movie_file):
+    itlist = []
+    rdict = {}
+    m = open(movie_file)
+    lines = []
+    for line in m:
+        line = line.strip().split(" ")
+        lines.append(line)
+    #Creates a list of the lines in the file.
+        
+    for line in lines:
+        itlist.append(line[1])
+        itlist = sorted(list(set(itlist)))
+    #Creates list of all movies watched.
+
+    for line in lines:
+        rater = line[0]
+        movie = line[1]
+        rating = line[2]
+        indexs = itlist.index(movie)
+        if rater not in rdict.keys():
+            rdict[rater] = len(itlist)*[0]   
+        else:
+            rdict[rater][indexs] = rating
+    #Creates the dictionary for the students who watched the movies and their ratings..
+    
+    m.close()
+    return itlist, rdict
+
